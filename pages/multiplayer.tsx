@@ -1,8 +1,7 @@
 import { getSession } from 'next-auth/react'
-import styles from '../styles/Home.module.css'
 
-export default function Home() {
-  return <p>home</p>
+export default function Multiplayer() {
+  return <p>multiplayer</p>
 }
 
 export const getServerSideProps = async (context: any) => {
@@ -16,7 +15,6 @@ export const getServerSideProps = async (context: any) => {
       }
     }
   }
-
   return {
     props: {
       ...session

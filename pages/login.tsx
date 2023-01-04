@@ -1,18 +1,19 @@
+import Router from 'next/router'
+import { signIn, useSession } from 'next-auth/react'
+import Image from 'next/image'
 import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material'
 import AdbIcon from '@mui/icons-material/Adb'
-import Image from 'next/image'
-import { Loader } from '../components/Loader/Loader'
-import useLogin from '../hooks/useLogin'
+import Loader from '../components/Loader/Loader'
 import Logo from '../assets/logo.svg'
 import GitHubLogo from 'assets/GitHubLogo.png'
 import GoogleLogo from 'assets/GoogleLogo.svg'
 
 export default function Login() {
-  const { router, status, signIn } = useLogin()
+  const { status } = useSession()
 
   if (status === 'loading') return <Loader />
 
-  if (status === 'authenticated') router.push('/')
+  if (status === 'authenticated') Router.push('/')
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { AppBar, Typography, Container } from '@mui/material'
 
-export const Footer = () => {
+export default function Footer() {
   return (
     <AppBar position='static' component='footer'>
       <Container maxWidth='xl'>
@@ -18,7 +18,7 @@ export const Footer = () => {
             textDecoration: 'none',
             justifyContent: 'center'
           }}>
-          <a href='https://www.rpxic.com' style={{ color: 'white', textDecoration: 'none' }}>
+          <a href='https://www.rpxic.com' target='_blank' rel='noreferrer noopener' style={{ color: 'white', textDecoration: 'none' }}>
             RPXIC
           </a>
         </Typography>

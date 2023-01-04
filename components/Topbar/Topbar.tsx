@@ -5,7 +5,7 @@ import { AppBar, Toolbar, IconButton, Typography, Menu, Container, Avatar, Toolt
 import MenuIcon from '@mui/icons-material/Menu'
 import AdbIcon from '@mui/icons-material/Adb'
 
-function TopBar() {
+export default function TopBar() {
   const { data } = useSession()
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
@@ -116,7 +116,7 @@ function TopBar() {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title='Open settings'>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt='avatar' src={data?.user?.image} />
+                    {data?.user?.image && <Avatar alt='avatar' src={data.user.image} />}
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -150,4 +150,3 @@ function TopBar() {
     </>
   )
 }
-export default TopBar

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { parsePathname } from '../../utils/parsePathname'
 
-export const Seo = () => {
+export default function Seo() {
   const { pathname } = useRouter()
   const parsedTitle = pathname === '/' ? 'Home' : parsePathname(pathname)
 

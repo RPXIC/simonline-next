@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
-import { Footer } from '../Footer/Footer'
-import { Seo } from '../Seo/Seo'
+import Footer from '../Footer/Footer'
+import Seo from '../Seo/Seo'
 import TopBar from '../Topbar/Topbar'
 
-export const Layout = ({ children }: { children: React.ReactNode }) => {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const { pathname } = useRouter()
 
   return (

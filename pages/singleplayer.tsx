@@ -1,10 +1,10 @@
 import { unstable_getServerSession } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import Router from 'next/router'
-import { Loader, Title, GoBackLink, ButtonLink, Container } from '../components'
+import { Loader, GoBackLink, Title } from '../components'
 import authOptions from './api/auth/[...nextauth]'
 
-export default function Multiplayer() {
+export default function Singleplayer() {
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -17,11 +17,7 @@ export default function Multiplayer() {
   return (
     <>
       <GoBackLink to='/' />
-      <Title title='MULTIPLAYER' />
-      <Container>
-        <ButtonLink to='/createGame' text='CREATE GAME' />
-        <ButtonLink to='/joinGame' text='JOIN GAME' />
-      </Container>
+      <Title title='SINGLEPLAYER' />
     </>
   )
 }

@@ -9,7 +9,6 @@ export default function Footer() {
           noWrap
           component='div'
           sx={{
-            mr: 2,
             display: { md: 'flex' },
             fontFamily: 'monospace',
             fontWeight: 700,
@@ -18,7 +17,7 @@ export default function Footer() {
             textDecoration: 'none',
             justifyContent: 'center'
           }}>
-          <a href='https://www.rpxic.com' target='_blank' rel='noreferrer noopener' style={{ color: 'white', textDecoration: 'none' }}>
+          <a href='https://github.com/RPXIC' target='_blank' rel='noreferrer noopener' style={{ color: 'white', textDecoration: 'none' }}>
             RPXIC
           </a>
         </Typography>

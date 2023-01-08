@@ -1,19 +1,38 @@
+import { useEffect } from 'react'
 import Router from 'next/router'
 import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material'
 import AdbIcon from '@mui/icons-material/Adb'
-import Loader from '../components/Loader/Loader'
-import Logo from '../assets/logo.svg'
-import GitHubLogo from 'assets/GitHubLogo.png'
-import GoogleLogo from 'assets/GoogleLogo.svg'
+import { Loader, Title } from '../components'
+import { Logo, GitHubLogo, GoogleLogo } from '../assets'
 
 export default function Login() {
-  const { status } = useSession()
+  const { status, data } = useSession()
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      const { user } = data
+
+      if (user) {
+        try {
+          ;(async () => {
+            await fetch('/api/register', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: user.name, email: user.email })
+            })
+          })()
+        } catch (error) {
+          console.log(error)
+        }
+        Router.push('/')
+      }
+    }
+    //eslint-disable-next-line
+  }, [status])
 
   if (status === 'loading') return <Loader />
-
-  if (status === 'authenticated') Router.push('/')
 
   return (
     <>
@@ -72,13 +91,7 @@ export default function Login() {
             justifyContent: 'flex-start',
             alignItems: 'center'
           }}>
-          <Typography
-            variant='h4'
-            noWrap
-            component='h2'
-            sx={{ fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', pb: 1 }}>
-            LOGIN
-          </Typography>
+          <Title title='LOGIN' />
           <Box sx={{ width: '30ch' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Button onClick={() => signIn('github')}>

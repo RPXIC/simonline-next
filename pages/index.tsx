@@ -1,7 +1,7 @@
 import { unstable_getServerSession } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import Router from 'next/router'
-import Loader from '../components/Loader/Loader'
+import { Loader, Title } from '../components'
 import authOptions from './api/auth/[...nextauth]'
 import styles from '../styles/Home.module.css'
 
@@ -15,7 +15,7 @@ export default function Home() {
 
   if (status === 'loading') return <Loader />
 
-  return <p>home</p>
+  return <Title title='HOME' />
 }
 
 export async function getServerSideProps(context: any) {

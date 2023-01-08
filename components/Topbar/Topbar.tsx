@@ -4,6 +4,7 @@ import { signOut, useSession } from 'next-auth/react'
 import { AppBar, Toolbar, IconButton, Typography, Menu, Container, Avatar, Tooltip, MenuItem, Box } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import AdbIcon from '@mui/icons-material/Adb'
+import Text from '../Text/Text'
 
 export default function TopBar() {
   const { data } = useSession()
@@ -81,6 +82,11 @@ export default function TopBar() {
                     </Link>
                   </MenuItem>
                   <MenuItem>
+                    <Link href='/singleplayer' style={{ color: 'black', textDecoration: 'none' }}>
+                      SINGLEPLAYER
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
                     <Link href='/multiplayer' style={{ color: 'black', textDecoration: 'none' }}>
                       MULTIPLAYER
                     </Link>
@@ -107,6 +113,9 @@ export default function TopBar() {
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2, justifyContent: 'space-evenly' }}>
                 <Link href='/' style={{ color: 'white', textDecoration: 'none' }}>
                   HOME
+                </Link>
+                <Link href='/singleplayer' style={{ color: 'white', textDecoration: 'none' }}>
+                  SINGLEPLAYER
                 </Link>
                 <Link href='/multiplayer' style={{ color: 'white', textDecoration: 'none' }}>
                   MULTIPLAYER
@@ -145,7 +154,7 @@ export default function TopBar() {
           </Container>
         </AppBar>
       ) : (
-        <p>Redirecting...</p>
+        <Text text='REDIRECTING...' />
       )}
     </>
   )

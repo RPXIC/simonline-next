@@ -6,7 +6,7 @@ import { Loader, GoBackLink, Title, Container, Text } from '../components'
 import authOptions from './api/auth/[...nextauth]'
 
 export default function CreateGame() {
-  const { status } = useSession({
+  const { status, data } = useSession({
     required: true,
     onUnauthenticated() {
       Router.push('/login')
@@ -17,9 +17,10 @@ export default function CreateGame() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
+    const { user } = data
     const name = e.target.gameName.value
     if (name.trim()) {
-      console.log('send')
+      console.log('send', data)
     }
   }
 

@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
+import clientPromise from '../../../lib/mongodb'
 
 export default NextAuth({
   providers: [
@@ -20,19 +21,12 @@ export default NextAuth({
       }
     })
   ],
-  session: {
-    jwt: true,
-    maxAge: 30 * 24 * 60 * 60 // 30 days
-  },
   callbacks: {
-    async jwt({ token, account }) {
-      if (account) {
-        token.accessToken = account.access_token
-      }
-      return token
-    },
     async session({ session, token, user }) {
-      session.accessToken = token.accessToken
+      const client = await clientPromise
+      const db = client.db('simonline-v2')
+      const res = await db.collection('users').findOne({ email: token.email })
+      session.user.id = res._id.toString()
       return session
     }
   }

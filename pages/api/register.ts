@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 //@ts-ignore
 import clientPromise from '../../lib/mongodb'
+import sanitize from '../../utils/sanitize'
 
 type Data = {
   status: number
@@ -18,11 +19,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const result = await db.collection('users').findOne({ email })
 
   if (result) {
-    res.json({ status: 200, message: 'User already registered' })
+    const sanitizedResult = sanitize(result)
+    res.json({ status: 200, message: 'User already registered', data: sanitizedResult })
   } else {
     try {
-      await db.collection('users').insertOne({ name, email })
-      res.json({ status: 200, message: 'User registered' })
+      const newUser = { name, email, alias }
+      const res = await db.collection('users').insertOne(newUser)
+      //@ts-ignore
+      newUser.id = res.insertedId.toString()
+      const sanitizedUserRegistered = sanitize(newUser)
+      res.json({ status: 200, message: 'User registered', data: sanitizedUserRegistered })
     } catch (error) {
       console.log(error)
       res.json({ status: 404, error: 'error' })

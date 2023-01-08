@@ -144,7 +144,12 @@ export default function TopBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}>
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center' onClick={() => signOut()}>
+                    <Typography
+                      textAlign='center'
+                      onClick={() => {
+                        localStorage.clear()
+                        signOut()
+                      }}>
                       LOGOUT
                     </Typography>
                   </MenuItem>

@@ -23,7 +23,7 @@ export default function Games() {
     socket.on('games', (retrievedGames) => {
       setGames(retrievedGames)
     })
-    socket.emit('games')
+    socket.emit('games', games)
   }
 
   return (
@@ -40,7 +40,7 @@ export default function Games() {
                         <VideogameAssetIcon />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={game.name} secondary='x players' />
+                    <ListItemText primary={game.name} secondary={`${game.players.length} players waiting`} />
                   </ListItem>
                 </Button>
               )

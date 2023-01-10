@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const onConnection = (socket) => {
     const retrieveGames = async () => {
       const client = await clientPromise
-      const db = client.db('simonline-v1')
+      const db = client.db('simonline-v2')
       const games = await db.collection('games').find({ status: 'waiting' }).toArray()
 
       try {

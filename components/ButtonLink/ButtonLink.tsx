@@ -4,10 +4,10 @@ import Text from '../Text/Text'
 
 export default function ButtonLink({ to, text }: { to: string; text: string }) {
   return (
-    <Button variant='outlined'>
-      <Link href={to} style={{ textDecoration: 'none' }}>
+    <Link href={to} style={{ textDecoration: 'none' }}>
+      <Button variant='outlined' style={{ width: '100%' }}>
         <Text text={text} />
-      </Link>
-    </Button>
+      </Button>
+    </Link>
   )
 }

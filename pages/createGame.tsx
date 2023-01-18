@@ -20,14 +20,10 @@ export default function CreateGame() {
 
   useEffect(() => {
     socketInitializer()
-    return () => {
-      //@ts-ignore
-      socket?.off('games')
-    }
   }, [])
 
   const socketInitializer = async () => {
-    await fetch('/api/games')
+    await fetch('/api/socket')
     socket = io()
   }
 
@@ -48,6 +44,7 @@ export default function CreateGame() {
       if (result.status === 200) {
         socket.emit('games', {})
         setError(undefined)
+        Router.push('/joinGame')
       } else {
         setError(result.error)
       }
